@@ -1,4 +1,6 @@
 __pycache__/
 
 /HW2/wiki-news-300d-1M.vec.zip
-/HW3/qa_data.jsonl.zip
+/HW3/data
+
+/.ipynb_checkpoints/
