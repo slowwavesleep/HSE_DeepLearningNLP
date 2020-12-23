@@ -52,11 +52,11 @@ class QAData(Dataset):
         # it is necessary to subtract 1 to prevent long examples
         # from having mismatched length because <BOS> and <EOS>
         # tags are added after clipping an example to the max size
-        encoder_seq = self.source[index][:self.max_len_source - 1]  # <BOS> + ...
-        decoder_seq = self.target[index][:self.max_len_target - 1]  # <BOS> + ...
-        target_seq = self.target[index][:self.max_len_target - 1]  # ... + <EOS>
+        encoder_seq = self.source[index][:self.max_len_source - 2]  # <BOS> + question + <EOS>
+        decoder_seq = self.target[index][:self.max_len_target - 1]  # <BOS> + response
+        target_seq = self.target[index][:self.max_len_target - 1]  # response + <EOS>
 
-        encoder_seq = self.pad_seq(seq=[self.bos_index] + encoder_seq,
+        encoder_seq = self.pad_seq(seq=[self.bos_index] + encoder_seq + [self.eos_index],
                                    max_len=self.max_len_source)
 
         decoder_seq = self.pad_seq(seq=[self.bos_index] + decoder_seq,
